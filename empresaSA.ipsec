@@ -1,0 +1,31 @@
+
+conn empresaSA
+        ## Configuracoes gerais ##
+        authby=secret
+        type=tunnel
+        auto=route
+        dpdaction=restart
+        dpddelay=10s
+        dpdtimeout=60s
+        rekey=yes
+
+        ## Left = Host local ##
+        left=100.00.220.10
+        leftsubnet=172.27.129.0/24
+
+        ## Right = Host remoto ##
+        right=177.100.100.10
+        rightsubnets={ 10.168.100.0/24 10.168.111.0/24 10.168.101.0/24 }
+        ## Phase 1 ##
+        ikelifetime=8h
+        ike=aes256-sha2;modp2048
+        keyexchange=ike
+
+        ## Phase 2 ##
+        salifetime=1h
+        phase2=esp
+        phase2alg=aes256-sha2;modp2048
+
+
+
+%any 177.100.100.10 : PSK "chaveps-pasd1"
